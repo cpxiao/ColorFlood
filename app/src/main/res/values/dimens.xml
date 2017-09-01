@@ -1,0 +1,4 @@
+<resources>
+
+    <dimen name="setting_item_height">60dp</dimen>
+</resources>

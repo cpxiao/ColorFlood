@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#146"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="30dp"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/btn_grid_size"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_item_height">
+
+                <TextView
+                    style="@style/SettingsLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/settings_grid_size"/>
+
+                <TextView
+                    android:id="@+id/tv_grid_size"
+                    style="@style/SettingsValue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_color_scheme"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_item_height">
+
+                <TextView
+                    style="@style/SettingsLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/settings_color"/>
+
+                <TextView
+                    style="@style/SettingsValue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_color_transparency"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_item_height">
+
+                <TextView
+                    style="@style/SettingsLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/settings_color_alpha"/>
+
+                <TextView
+                    style="@style/SettingsValue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_sound"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_item_height">
+
+                <TextView
+                    style="@style/SettingsLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/settings_sound"/>
+
+                <TextView
+                    android:id="@+id/tv_sound"
+                    style="@style/SettingsValue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_music"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_item_height">
+
+                <TextView
+                    style="@style/SettingsLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/settings_bgm"/>
+
+                <TextView
+                    android:id="@+id/tv_music"
+                    style="@style/SettingsValue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_borders"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_item_height">
+
+                <TextView
+                    style="@style/SettingsLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/settings_borders"/>
+
+                <TextView
+                    android:id="@+id/tv_borders"
+                    style="@style/SettingsValue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <include layout="@layout/layout_ads"/>
+
+</LinearLayout>

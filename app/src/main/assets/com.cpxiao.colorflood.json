@@ -1,0 +1,66 @@
+//{
+//  "ad_position": 3,
+//  "ad_type": 4,
+//  "ad_size": 100,
+//  "publish_id": "236636880101032_346432689121450",
+//  "place_id": ""
+//}
+
+{
+  "msg": "",
+  "country": "CN",
+  "error": 0,
+  "data": {
+    "extra_data": {
+    },
+    "data": [
+      {
+        "ad_position": 1,
+        "ad_type": 2,
+        "ad_size": 50,
+        "place_id": "ca-app-pub-4157365005379790/1379742869"
+      },{
+        "ad_position": 1,
+        "ad_type": 2,
+        "ad_size": 50,
+        "place_id": "ca-app-pub-4157365005379790/1100541260"
+      },{
+        "ad_position": 1,
+        "ad_type": 2,
+        "ad_size": 50,
+        "place_id": "ca-app-pub-4157365005379790/6685314861"
+      },{
+        "ad_position": 1,
+        "ad_type": 2,
+        "ad_size": 50,
+        "place_id": "ca-app-pub-4157365005379790/7823970862"
+      },
+      {
+        "ad_position": 1,
+        "ad_type": 4,
+        "ad_size": 50,
+        "place_id": "1292081760878860_1292082094212160"
+      },
+      {
+        "ad_position": 1,
+        "ad_type": 4,
+        "ad_size": 50,
+        "place_id": "1292081760878860_1292082314212138"
+      },
+      {
+        "ad_position": 1,
+        "ad_type": 4,
+        "ad_size": 50,
+        "place_id": "1292081760878860_1295386457215057"
+      },
+      {
+        "ad_position": 1,
+        "ad_type": 4,
+        "ad_size": 50,
+        "place_id": "1292081760878860_1295389873881382"
+      }
+    ]
+  },
+  "time": "00.026045s"
+}
+

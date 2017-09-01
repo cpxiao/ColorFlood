@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:paddingBottom="50dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="30dp"
+        android:paddingTop="30dp">
+
+        <com.cpxiao.colorflood.views.ColorToolView
+            android:id="@+id/color_tool_view_top"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"/>
+
+        <com.cpxiao.colorflood.views.GameView
+            android:id="@+id/game_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"/>
+
+        <com.cpxiao.colorflood.views.ColorToolView
+            android:id="@+id/color_tool_view_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.cpxiao.gamelib.views.RotateTextView
+            android:id="@+id/top_player_msg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="50dp"
+            android:layout_weight="1"
+            android:angle="180"
+            android:gravity="center"
+            android:textSize="36sp"
+            android:textStyle="bold"/>
+
+        <com.cpxiao.gamelib.views.RotateTextView
+            android:id="@+id/bottom_player_msg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="36sp"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
+
+    <com.cpxiao.gamelib.views.RotateTextView
+        android:id="@+id/score_text_view"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:angle="90"
+        android:gravity="end|center_vertical"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+</RelativeLayout>
