@@ -11,21 +11,26 @@ import com.cpxiao.R;
 import com.cpxiao.androidutils.library.utils.PreferencesUtils;
 import com.cpxiao.colorflood.controller.Controller;
 import com.cpxiao.colorflood.imps.OnToolViewClickListener;
-import com.cpxiao.colorflood.mode.Extra;
+import com.cpxiao.colorflood.mode.extra.BlockColor;
+import com.cpxiao.colorflood.mode.extra.Extra;
+import com.cpxiao.colorflood.mode.extra.GridSize;
 import com.cpxiao.colorflood.views.ColorToolView;
 import com.cpxiao.colorflood.views.GameView;
-import com.cpxiao.gamelib.fragment.BaseFragment;
+import com.cpxiao.gamelib.fragment.BaseZAdsFragment;
+import com.cpxiao.zads.core.ZAdPosition;
 
 /**
  * @author cpxiao on 2017/09/01.
  */
 
-public class CasualGameFragment extends BaseFragment {
+public class CasualGameFragment extends BaseZAdsFragment {
     private int mGridCountX, mGridCountY;
     private int mScore, mBestScore;
     private TextView mScoreView, mBestScoreView;
     private Controller mController;
     private int[] mColorArray;
+    private GameView gameView;
+    private boolean isDialogShown = false;
 
     public static CasualGameFragment newInstance(Bundle bundle) {
         CasualGameFragment fragment = new CasualGameFragment();
@@ -37,29 +42,31 @@ public class CasualGameFragment extends BaseFragment {
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
+        loadZAds(ZAdPosition.POSITION_GAME);
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             mGridCountX = bundle.getInt(Extra.Name.GAME_DIFFICULTY_X);
             mGridCountY = bundle.getInt(Extra.Name.GAME_DIFFICULTY_Y);
         }
 
-        mColorArray = Extra.Color._6colorArray;
+        mColorArray = BlockColor._6colorArray;
 
         final Context context = getHoldingActivity();
-        boolean needPadding = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_HAS_BORDERS, Extra.Key.SETTING_HAS_BORDERS_DEFAULT);
-        mController = new Controller.Builder()
-                .setGridCountX(mGridCountX)
-                .setGridCountY(mGridCountY)
-                .setNeedPadding(needPadding)
-                .setColorArray(mColorArray)
-                .build();
+        //        boolean needPadding = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_HAS_BORDERS, Extra.Key.SETTING_HAS_BORDERS_DEFAULT);
+        //        mController = new Controller.Builder()
+        //                .setGridCountX(mGridCountX)
+        //                .setGridCountY(mGridCountY)
+        //                .setNeedPadding(needPadding)
+        //                .setColorArray(mColorArray)
+        //                .build();
 
         mScoreView = (TextView) view.findViewById(R.id.score_view);
-        mScore = 0;
-        setScoreView(mScore);
+        //        mScore = 0;
+        //        setScoreView(mScore);
 
         mBestScoreView = (TextView) view.findViewById(R.id.best_score_view);
-        String key = Extra.Key.CASUAL_GAME_BEST_SCORE + PreferencesUtils.getString(context, Extra.GridSize.SIZE_KEY, Extra.GridSize.SIZE_DEFAULT);
+        String key = Extra.Key.CASUAL_GAME_BEST_SCORE + PreferencesUtils.getString(context, GridSize.SIZE_KEY, GridSize.SIZE_DEFAULT);
         mBestScore = PreferencesUtils.getInt(context, key, Extra.Key.CASUAL_GAME_BEST_SCORE_DEFAULT);
         setBestScoreView(mBestScore);
 
@@ -78,7 +85,7 @@ public class CasualGameFragment extends BaseFragment {
                     //判断是否完成
                     if (mController.checkSuccess()) {
                         if (mScore <= mBestScore) {
-                            String key = Extra.Key.CASUAL_GAME_BEST_SCORE + PreferencesUtils.getString(context, Extra.GridSize.SIZE_KEY, Extra.GridSize.SIZE_DEFAULT);
+                            String key = Extra.Key.CASUAL_GAME_BEST_SCORE + PreferencesUtils.getString(context, GridSize.SIZE_KEY, GridSize.SIZE_DEFAULT);
                             PreferencesUtils.putInt(context, key, mScore);
                         }
                         showSuccessDialog();
@@ -89,7 +96,24 @@ public class CasualGameFragment extends BaseFragment {
             }
         });
 
-        GameView gameView = (GameView) view.findViewById(R.id.game_view);
+        gameView = (GameView) view.findViewById(R.id.game_view);
+        //        gameView.setController(mController);
+        initGameView(context);
+    }
+
+    private void initGameView(Context context) {
+        isDialogShown=false;
+        boolean needPadding = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_HAS_BORDERS, Extra.Key.SETTING_HAS_BORDERS_DEFAULT);
+        mController = new Controller.Builder()
+                .setGridCountX(mGridCountX)
+                .setGridCountY(mGridCountY)
+                .setNeedPadding(needPadding)
+                .setColorArray(mColorArray)
+                .build();
+
+        mScore = 0;
+        setScoreView(mScore);
+
         gameView.setController(mController);
     }
 
@@ -100,7 +124,11 @@ public class CasualGameFragment extends BaseFragment {
 
 
     private void showSuccessDialog() {
-        Context context = getHoldingActivity();
+        if (isDialogShown) {
+            return;
+        }
+        isDialogShown = true;
+        final Context context = getHoldingActivity();
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.mission_completed))
                 .setMessage(context.getString(R.string.play_again))
@@ -108,10 +136,11 @@ public class CasualGameFragment extends BaseFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_X, mGridCountX);
-                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_Y, mGridCountY);
-                        addFragment(CasualGameFragment.newInstance(bundle));
+                        //                        Bundle bundle = new Bundle();
+                        //                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_X, mGridCountX);
+                        //                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_Y, mGridCountY);
+                        //                        addFragment(CasualGameFragment.newInstance(bundle));
+                        initGameView(context);
                     }
                 })
                 .setNegativeButton(context.getString(R.string.cancel), new DialogInterface.OnClickListener() {

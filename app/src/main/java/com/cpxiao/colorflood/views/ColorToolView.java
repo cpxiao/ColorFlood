@@ -9,10 +9,11 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.cpxiao.AppConfig;
 import com.cpxiao.androidutils.library.utils.PreferencesUtils;
 import com.cpxiao.colorflood.imps.OnToolViewClickListener;
-import com.cpxiao.colorflood.mode.Extra;
-import com.cpxiao.AppConfig;
+import com.cpxiao.colorflood.mode.extra.BlockColor;
+import com.cpxiao.colorflood.mode.extra.Extra;
 
 /**
  * @author cpxiao on 2017/01/14.
@@ -87,12 +88,12 @@ public class ColorToolView extends View implements View.OnTouchListener {
                     if (mNonClickableColorArray != null) {
                         for (int nonClickableColor : mNonClickableColorArray) {
                             if (nonClickableColor == mColorArray[i]) {
-                                mPaint.setColor(Extra.Color.colorGray);
+                                mPaint.setColor(BlockColor.colorGray);
                             }
                         }
                     }
                 } else {
-                    mPaint.setColor(Extra.Color.colorGray);
+                    mPaint.setColor(BlockColor.colorGray);
                     mPaint.setAlpha(255);
                 }
                 if (isRound) {

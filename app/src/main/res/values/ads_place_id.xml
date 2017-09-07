@@ -3,6 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
-    <string name="admob_native_id_home">id</string>
+    <string name="admob_native_id_home">ca-app-pub-4157365005379790/7284221907</string>
 
 </resources>

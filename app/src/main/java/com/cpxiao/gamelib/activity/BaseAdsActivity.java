@@ -5,8 +5,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.cpxiao.AppConfig;
@@ -21,9 +19,6 @@ import com.facebook.ads.AdView;
 import com.google.android.gms.ads.AdRequest;
 import com.umeng.analytics.MobclickAgent;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * @author cpxiao on 2017/3/1.
@@ -35,7 +30,7 @@ public abstract class BaseAdsActivity extends BaseAppActivity {
     protected static final boolean DEBUG = AppConfig.DEBUG;
     protected final String TAG = getClass().getSimpleName();
 
-    protected final String TEST_DEVICE_FB = "67F59060394DB36B95B18F5EE5B5D735";
+    protected final String TEST_DEVICE_FB = "3bcc341340550569d910c92a2dae2677";
     protected final String TEST_DEVICE_ADMOB = "67F59060394DB36B95B18F5EE5B5D735";
 
     protected AdView mFbAdView;
@@ -45,12 +40,11 @@ public abstract class BaseAdsActivity extends BaseAppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //no title
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        //隐藏状态栏部分（电池电量、时间等部分）
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //        //no title
+        //        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //
+        //        //隐藏状态栏部分（电池电量、时间等部分）
+        //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
     }
 
@@ -82,6 +76,10 @@ public abstract class BaseAdsActivity extends BaseAppActivity {
 
     protected void initFbAds50(String placementId) {
         initFbAds(placementId, AdSize.BANNER_HEIGHT_50);
+    }
+
+    protected void initFbAds90(String placementId) {
+        initFbAds(placementId, AdSize.BANNER_HEIGHT_90);
     }
 
     protected void initFbAds250(String placementId) {
@@ -135,13 +133,13 @@ public abstract class BaseAdsActivity extends BaseAppActivity {
 
         });
         if (DEBUG) {
-            //            AdSettings.addTestDevice(TEST_DEVICE_FB);
+            AdSettings.addTestDevice(TEST_DEVICE_FB);
 
-            // 如果想要添加多台测试设备，只需创建一个字符串列表，添加到加载广告前的位置：
-            List<String> testDevices = new ArrayList<>();
-            testDevices.add("55c4f301d7c1183f1fa6ede6b3f2fe2e");
-            testDevices.add("e6298923190b4e7e7119e0f14c44f097");
-            AdSettings.addTestDevices(testDevices);
+            //            // 如果想要添加多台测试设备，只需创建一个字符串列表，添加到加载广告前的位置：
+            //            List<String> testDevices = new ArrayList<>();
+            //            testDevices.add("55c4f301d7c1183f1fa6ede6b3f2fe2e");
+            //            testDevices.add("e6298923190b4e7e7119e0f14c44f097");
+            //            AdSettings.addTestDevices(testDevices);
         }
         if (DEBUG) {
             Log.d(TAG, "initFbAds:  mFbAdView.loadAd();");

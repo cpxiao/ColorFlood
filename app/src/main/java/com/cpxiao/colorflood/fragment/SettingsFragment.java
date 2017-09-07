@@ -7,14 +7,16 @@ import android.widget.TextView;
 
 import com.cpxiao.R;
 import com.cpxiao.androidutils.library.utils.PreferencesUtils;
-import com.cpxiao.colorflood.mode.Extra;
-import com.cpxiao.gamelib.fragment.BaseFragment;
+import com.cpxiao.colorflood.mode.extra.Extra;
+import com.cpxiao.colorflood.mode.extra.GridSize;
+import com.cpxiao.gamelib.fragment.BaseZAdsFragment;
+import com.cpxiao.zads.core.ZAdPosition;
 
 /**
  * @author cpxiao on 2017/09/01.
  */
 
-public class SettingsFragment extends BaseFragment implements View.OnClickListener {
+public class SettingsFragment extends BaseZAdsFragment implements View.OnClickListener {
     private TextView mGridSize;
     private TextView mSound;
     private TextView mMusic;
@@ -31,6 +33,8 @@ public class SettingsFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
+        loadZAds(ZAdPosition.POSITION_SETTINGS);
+
         Context context = getHoldingActivity();
         view.findViewById(R.id.btn_grid_size).setOnClickListener(this);
         view.findViewById(R.id.btn_color_scheme).setOnClickListener(this);
@@ -43,7 +47,7 @@ public class SettingsFragment extends BaseFragment implements View.OnClickListen
         view.findViewById(R.id.btn_color_transparency).setVisibility(View.GONE);
 
         mGridSize = (TextView) view.findViewById(R.id.tv_grid_size);
-        String gridSize = PreferencesUtils.getString(context, Extra.GridSize.SIZE_KEY, Extra.GridSize.SIZE_DEFAULT);
+        String gridSize = PreferencesUtils.getString(context, GridSize.SIZE_KEY, GridSize.SIZE_DEFAULT);
         mGridSize.setText(gridSize);
 
         mSound = (TextView) view.findViewById(R.id.tv_sound);
@@ -85,9 +89,9 @@ public class SettingsFragment extends BaseFragment implements View.OnClickListen
         Context context = getHoldingActivity();
         int id = v.getId();
         if (id == R.id.btn_grid_size) {
-            String gridSize = PreferencesUtils.getString(context, Extra.GridSize.SIZE_KEY, Extra.GridSize.SIZE_DEFAULT);
-            String nextGridSize = Extra.GridSize.getNextGridSize(gridSize);
-            PreferencesUtils.putString(context, Extra.GridSize.SIZE_KEY, nextGridSize);
+            String gridSize = PreferencesUtils.getString(context, GridSize.SIZE_KEY, GridSize.SIZE_DEFAULT);
+            String nextGridSize = GridSize.getNextGridSize(gridSize);
+            PreferencesUtils.putString(context, GridSize.SIZE_KEY, nextGridSize);
             mGridSize.setText(nextGridSize);
         } else if (id == R.id.btn_color_scheme) {
 

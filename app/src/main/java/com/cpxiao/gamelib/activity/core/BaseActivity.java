@@ -36,7 +36,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             getSupportFragmentManager().popBackStack();
         } else {
             showQuitConfirmDialog();
-//            finish();
         }
     }
 
@@ -45,7 +44,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (KeyEvent.KEYCODE_BACK == keyCode) {
             if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
-//                finish();
                 showQuitConfirmDialog();
                 return true;
             }
@@ -63,7 +61,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                         dialog.dismiss();
                         finish();
                     }
-                }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

@@ -2,7 +2,6 @@ package com.cpxiao.gamelib.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 
 /**
@@ -10,6 +9,7 @@ import android.view.SurfaceHolder;
  *
  * @author cpxiao on 2016/8/23
  * @version 2017/3/21
+ *          2017/8/17 修改默认fps
  */
 public abstract class BaseSurfaceViewFPS extends BaseSurfaceView implements Runnable {
 
@@ -21,8 +21,7 @@ public abstract class BaseSurfaceViewFPS extends BaseSurfaceView implements Runn
     /**
      * 设置FPS，默认为30
      */
-    private static final int DEFAULT_FPS = 30;
-    protected int mFPS = DEFAULT_FPS;
+    protected int mFPS = 60;
 
     public BaseSurfaceViewFPS(Context context) {
         super(context);
@@ -55,9 +54,6 @@ public abstract class BaseSurfaceViewFPS extends BaseSurfaceView implements Runn
 
     @Override
     public void run() {
-        if (DEBUG) {
-            Log.d(TAG, "run: ");
-        }
         while (isRunning) {
             synchronized (BaseSurfaceViewFPS.class.getSimpleName()) {
                 int deltaTime = 1000 / mFPS;

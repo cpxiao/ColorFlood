@@ -7,14 +7,16 @@ import android.widget.Button;
 
 import com.cpxiao.R;
 import com.cpxiao.androidutils.library.utils.PreferencesUtils;
-import com.cpxiao.colorflood.mode.Extra;
-import com.cpxiao.gamelib.fragment.BaseFragment;
+import com.cpxiao.colorflood.mode.extra.Extra;
+import com.cpxiao.colorflood.mode.extra.GridSize;
+import com.cpxiao.gamelib.fragment.BaseZAdsFragment;
+import com.cpxiao.zads.core.ZAdPosition;
 
 /**
  * @author cpxiao on 2017/09/01.
  */
 
-public class HomeFragment extends BaseFragment implements View.OnClickListener {
+public class HomeFragment extends BaseZAdsFragment implements View.OnClickListener {
 
     public static HomeFragment newInstance(Bundle bundle) {
         HomeFragment fragment = new HomeFragment();
@@ -26,6 +28,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
+        loadZAds(ZAdPosition.POSITION_HOME);
+
         Button btnCasual = (Button) view.findViewById(R.id.btn_casual);
         Button btnStepChallenge = (Button) view.findViewById(R.id.btn_step_challenge);
         Button btnVSComputer = (Button) view.findViewById(R.id.btn_vs_computer);
@@ -56,9 +60,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
         Context context = getHoldingActivity();
-        String size = PreferencesUtils.getString(context, Extra.GridSize.SIZE_KEY, Extra.GridSize.SIZE_DEFAULT);
-        int sizeX = Extra.GridSize.getGridCountX(size);
-        int sizeY = Extra.GridSize.getGridCountY(size);
+        String size = PreferencesUtils.getString(context, GridSize.SIZE_KEY, GridSize.SIZE_DEFAULT);
+        int sizeX = GridSize.getGridCountX(size);
+        int sizeY = GridSize.getGridCountY(size);
         if (id == R.id.btn_casual) {
             Bundle bundle = new Bundle();
             bundle.putInt(Extra.Name.GAME_DIFFICULTY_X, sizeX);

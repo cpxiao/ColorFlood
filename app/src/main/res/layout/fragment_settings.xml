@@ -156,6 +156,6 @@
     </ScrollView>
 
 
-    <include layout="@layout/layout_ads"/>
+    <!--<include layout="@layout/layout_ads"/>-->
 
 </LinearLayout>

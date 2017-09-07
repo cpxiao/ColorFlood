@@ -8,7 +8,8 @@ import com.cpxiao.R;
 import com.cpxiao.androidutils.library.utils.PreferencesUtils;
 import com.cpxiao.colorflood.controller.Controller;
 import com.cpxiao.colorflood.imps.OnToolViewClickListener;
-import com.cpxiao.colorflood.mode.Extra;
+import com.cpxiao.colorflood.mode.extra.BlockColor;
+import com.cpxiao.colorflood.mode.extra.Extra;
 import com.cpxiao.colorflood.views.ColorToolView;
 import com.cpxiao.colorflood.views.GameView;
 import com.cpxiao.gamelib.fragment.BaseFragment;
@@ -48,7 +49,7 @@ public class TwoPlayersGameFragment extends BaseFragment {
             mGridCountY = bundle.getInt(Extra.Name.GAME_DIFFICULTY_Y);
         }
         Context context = getHoldingActivity();
-        mColorArray = Extra.Color._6colorArray;
+        mColorArray = BlockColor._6colorArray;
         boolean needPadding = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_HAS_BORDERS, Extra.Key.SETTING_HAS_BORDERS_DEFAULT);
         mController = new Controller.Builder()
                 .setGridCountX(mGridCountX)

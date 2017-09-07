@@ -18,6 +18,7 @@ import com.cpxiao.AppConfig;
  *
  * @author cpxiao on 2016/5/31
  * @version 2017/3/21
+ *          2017/8/17 设置画笔
  */
 public abstract class BaseSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -27,8 +28,7 @@ public abstract class BaseSurfaceView extends SurfaceView implements SurfaceHold
     /**
      * 背景色
      */
-    private static final int BACKGROUND_COLOR = Color.WHITE;
-    private int mBackgroundColor = BACKGROUND_COLOR;
+    private int mBackgroundColor = Color.WHITE;
 
     /**
      * SurfaceHolder用于控制SurfaceView的大小、格式等，用于监听SurfaceView的状态。
@@ -82,6 +82,10 @@ public abstract class BaseSurfaceView extends SurfaceView implements SurfaceHold
 
         /* 实例一个画笔 */
         mPaint = new Paint();
+        mPaint.setAntiAlias(true);//抗锯齿,一般加这个就可以了，加另外两个可能会卡
+        //        mPaint.setDither(true);//防抖动
+        //        mPaint.setFilterBitmap(true);//用来对位图进行滤波处理
+        mPaint.setTextAlign(Paint.Align.CENTER);
 
         /* 设置焦点 */
         setFocusable(true);
@@ -161,12 +165,8 @@ public abstract class BaseSurfaceView extends SurfaceView implements SurfaceHold
                 drawCache();
 
                 if (canvas != null) {
-                    canvas.drawColor(mBackgroundColor);
                     canvas.drawBitmap(mBitmapCache, 0, 0, mPaint);
                 }
-                //                if (mSurfaceHolder != null) {
-                //                    mSurfaceHolder.unlockCanvasAndPost(canvas);
-                //                }
             }
         } catch (Exception e) {
             if (DEBUG) {
@@ -180,7 +180,7 @@ public abstract class BaseSurfaceView extends SurfaceView implements SurfaceHold
     }
 
     /**
-     * 设置背景色
+     * 设置背景色，注意要设置色值而非资源id值
      *
      * @param color color
      */

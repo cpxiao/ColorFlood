@@ -12,7 +12,9 @@ import com.cpxiao.AppConfig;
 import static android.R.attr.angle;
 
 /**
- * @author cpxiao on 2016/10/25.
+ * RotateTextView
+ *
+ * @author cpxiao on 2017/6/6.
  */
 
 public class RotateTextView extends AppCompatTextView {

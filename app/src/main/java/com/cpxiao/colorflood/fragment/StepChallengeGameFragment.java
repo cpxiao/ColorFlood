@@ -11,7 +11,8 @@ import com.cpxiao.R;
 import com.cpxiao.androidutils.library.utils.PreferencesUtils;
 import com.cpxiao.colorflood.controller.Controller;
 import com.cpxiao.colorflood.imps.OnToolViewClickListener;
-import com.cpxiao.colorflood.mode.Extra;
+import com.cpxiao.colorflood.mode.extra.BlockColor;
+import com.cpxiao.colorflood.mode.extra.Extra;
 import com.cpxiao.colorflood.views.ColorToolView;
 import com.cpxiao.colorflood.views.GameView;
 import com.cpxiao.gamelib.fragment.BaseFragment;
@@ -27,6 +28,9 @@ public class StepChallengeGameFragment extends BaseFragment {
     private TextView mScoreView;
     private Controller mController;
     private int[] mColorArray;
+    private GameView gameView;
+
+    private boolean isDialogShown = false;
 
     public static StepChallengeGameFragment newInstance(Bundle bundle) {
         StepChallengeGameFragment fragment = new StepChallengeGameFragment();
@@ -46,18 +50,18 @@ public class StepChallengeGameFragment extends BaseFragment {
         }
 
         final Context context = getHoldingActivity();
-        mColorArray = Extra.Color._6colorArray;
-        boolean needPadding = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_HAS_BORDERS, Extra.Key.SETTING_HAS_BORDERS_DEFAULT);
-        mController = new Controller.Builder()
-                .setGridCountX(mGridCountX)
-                .setGridCountY(mGridCountY)
-                .setNeedPadding(needPadding)
-                .setColorArray(mColorArray)
-                .build();
+        mColorArray = BlockColor._6colorArray;
+        //        boolean needPadding = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_HAS_BORDERS, Extra.Key.SETTING_HAS_BORDERS_DEFAULT);
+        //        mController = new Controller.Builder()
+        //                .setGridCountX(mGridCountX)
+        //                .setGridCountY(mGridCountY)
+        //                .setNeedPadding(needPadding)
+        //                .setColorArray(mColorArray)
+        //                .build();
 
         mScoreView = (TextView) view.findViewById(R.id.score_view);
-        mScore = 0;
-        setScoreView(mScore);
+        //        mScore = 0;
+        //        setScoreView(mScore);
 
         ColorToolView colorToolView = (ColorToolView) view.findViewById(R.id.color_tool_view);
         colorToolView.setColorArray(true, mColorArray);
@@ -84,8 +88,28 @@ public class StepChallengeGameFragment extends BaseFragment {
             }
         });
 
-        GameView gameView = (GameView) view.findViewById(R.id.game_view);
+        gameView = (GameView) view.findViewById(R.id.game_view);
+        //        gameView.setController(mController);
+
+        initGameView(context);
+    }
+
+    private void initGameView(Context context) {
+        isDialogShown = false;
+        boolean needPadding = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_HAS_BORDERS, Extra.Key.SETTING_HAS_BORDERS_DEFAULT);
+        mController = new Controller.Builder()
+                .setGridCountX(mGridCountX)
+                .setGridCountY(mGridCountY)
+                .setNeedPadding(needPadding)
+                .setColorArray(mColorArray)
+                .build();
+
+        mScore = 0;
+        setScoreView(mScore);
+
         gameView.setController(mController);
+
+
     }
 
     @Override
@@ -105,18 +129,24 @@ public class StepChallengeGameFragment extends BaseFragment {
         showDialog(context, title, msg);
     }
 
-    public void showDialog(Context context, String title, String msg) {
+    public void showDialog(final Context context, String title, String msg) {
+        if (isDialogShown) {
+            return;
+        }
+        isDialogShown = true;
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(msg)
                 .setPositiveButton(context.getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Bundle bundle = new Bundle();
-                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_X, mGridCountX);
-                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_Y, mGridCountY);
-                        bundle.putInt(Extra.Name.LIMIT_STEP, mLimitStep);
-                        addFragment(StepChallengeGameFragment.newInstance(bundle));
+                        //                        Bundle bundle = new Bundle();
+                        //                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_X, mGridCountX);
+                        //                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_Y, mGridCountY);
+                        //                        bundle.putInt(Extra.Name.LIMIT_STEP, mLimitStep);
+                        //                        addFragment(StepChallengeGameFragment.newInstance(bundle));
+
+                        initGameView(context);
                     }
                 })
                 .setNegativeButton(context.getString(R.string.cancel), new DialogInterface.OnClickListener() {

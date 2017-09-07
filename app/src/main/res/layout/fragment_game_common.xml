@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:paddingBottom="50dp">
+    android:paddingBottom="100dp">
 
     <TextView
         android:id="@+id/score_view"
@@ -40,5 +40,5 @@
         android:layout_marginTop="20dp"
         />
 
-    <include layout="@layout/layout_ads"/>
+    <!--<include layout="@layout/layout_ads"/>-->
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 
 import com.cpxiao.AppConfig;
+import com.cpxiao.colorflood.mode.extra.BlockColor;
 
 
 /**
@@ -78,7 +79,7 @@ public class Block {
 
 
     private void drawBg(Canvas canvas, Paint paint) {
-        paint.setColor(Extra.Color.colorBg);
+        paint.setColor(BlockColor.colorBg);
         canvas.drawRoundRect(mBgRectF, mBgPadding, mBgPadding, paint);
     }
 

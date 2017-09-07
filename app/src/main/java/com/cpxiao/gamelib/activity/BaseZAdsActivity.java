@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 
 import com.cpxiao.AppConfig;
 import com.cpxiao.R;
-import com.cpxiao.gamelib.activity.core.BaseAppActivity;
 import com.cpxiao.zads.ZAdManager;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
@@ -25,8 +24,9 @@ import com.umeng.analytics.MobclickAgent;
  *          cpxiao on 2017/8/19     添加插屏广告
  *          cpxiao on 2017/8/24     提取test device
  *          cpxiao on 2017/8/31     修改继承类
+ *          cpxiao on 2017/9/4     修改继承类, extends BaseAdsActivity
  */
-public abstract class BaseZAdsActivity extends BaseAppActivity {
+public abstract class BaseZAdsActivity extends BaseAdsActivity {
     protected static final boolean DEBUG = AppConfig.DEBUG;
     protected final String TAG = getClass().getSimpleName();
 
@@ -40,11 +40,11 @@ public abstract class BaseZAdsActivity extends BaseAppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        //no title
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//
-//        //隐藏状态栏部分（电池电量、时间等部分）
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //        //no title
+        //        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //
+        //        //隐藏状态栏部分（电池电量、时间等部分）
+        //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
     }
 
@@ -69,11 +69,16 @@ public abstract class BaseZAdsActivity extends BaseAppActivity {
         super.onDestroy();
     }
 
-    protected void initAds(int zAdPosition) {
+    public void loadZAds(int zAdPosition) {
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout_ads);
         ZAdManager.getInstance().loadAd(getApplicationContext(), zAdPosition, layout);
     }
 
+    /**
+     * 插页广告
+     *
+     * @param unitId id
+     */
     protected void initAdMobInterstitialAd(String unitId) {
         if (TextUtils.isEmpty(unitId)) {
             if (DEBUG) {

@@ -19,6 +19,18 @@ public class MainActivity extends BaseZAdsActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ZAdManager.getInstance().init(getApplicationContext());
-        initAds(ZAdPosition.POSITION_HOME);
+        loadAds();
+    }
+
+    private void loadAds() {
+        initAdMobAds100("ca-app-pub-4157365005379790/7658792277");
+        initFbAds90("1292081760878860_1425254130894955");
+        loadZAds(ZAdPosition.POSITION_MAIN);
+    }
+
+    @Override
+    protected void onDestroy() {
+        ZAdManager.getInstance().destroyAllPosition(this);
+        super.onDestroy();
     }
 }
