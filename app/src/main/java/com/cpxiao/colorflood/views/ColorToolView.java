@@ -4,15 +4,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.cpxiao.AppConfig;
+import com.cpxiao.R;
 import com.cpxiao.androidutils.library.utils.PreferencesUtils;
 import com.cpxiao.colorflood.imps.OnToolViewClickListener;
-import com.cpxiao.colorflood.mode.extra.BlockColor;
 import com.cpxiao.colorflood.mode.extra.Extra;
 
 /**
@@ -71,6 +72,7 @@ public class ColorToolView extends View implements View.OnTouchListener {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         boolean isRound = PreferencesUtils.getBoolean(getContext(), Extra.Key.IS_ROUND, Extra.Key.IS_ROUND_DEFAULT);
+        int colorGray = ContextCompat.getColor(getContext(), R.color.colorGray);
         if (mColorArray != null) {
             for (int i = 0; i < mColorArray.length; i++) {
                 mBlockRectF.left = paddingLR + blockWH * i + blockPadding;
@@ -88,12 +90,12 @@ public class ColorToolView extends View implements View.OnTouchListener {
                     if (mNonClickableColorArray != null) {
                         for (int nonClickableColor : mNonClickableColorArray) {
                             if (nonClickableColor == mColorArray[i]) {
-                                mPaint.setColor(BlockColor.colorGray);
+                                mPaint.setColor(colorGray);
                             }
                         }
                     }
                 } else {
-                    mPaint.setColor(BlockColor.colorGray);
+                    mPaint.setColor(colorGray);
                     mPaint.setAlpha(255);
                 }
                 if (isRound) {

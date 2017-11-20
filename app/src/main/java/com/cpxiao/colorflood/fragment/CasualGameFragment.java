@@ -44,15 +44,16 @@ public class CasualGameFragment extends BaseZAdsFragment {
     protected void initView(View view, Bundle savedInstanceState) {
         loadZAds(ZAdPosition.POSITION_GAME);
 
+        final Context context = getHoldingActivity();
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             mGridCountX = bundle.getInt(Extra.Name.GAME_DIFFICULTY_X);
             mGridCountY = bundle.getInt(Extra.Name.GAME_DIFFICULTY_Y);
         }
 
-        mColorArray = BlockColor._6colorArray;
+        mColorArray = BlockColor.get6ColorArray(context);
 
-        final Context context = getHoldingActivity();
 
         mScoreView = (TextView) view.findViewById(R.id.score_view);
 

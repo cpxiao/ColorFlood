@@ -53,7 +53,7 @@ public class StepChallengeGameFragment extends BaseZAdsFragment {
         }
 
         final Context context = getHoldingActivity();
-        mColorArray = BlockColor._6colorArray;
+        mColorArray = BlockColor.get6ColorArray(context);
 
         mScoreView = (TextView) view.findViewById(R.id.score_view);
 

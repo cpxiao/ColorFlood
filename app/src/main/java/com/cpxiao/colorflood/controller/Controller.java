@@ -1,7 +1,9 @@
 package com.cpxiao.colorflood.controller;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 
 import com.cpxiao.colorflood.mode.Block;
 import com.cpxiao.AppConfig;
@@ -59,10 +61,6 @@ public class Controller {
                 mGrid[y][x] = new Block.Builder()
                         .setGridX(x)
                         .setGridY(y)
-                        //                        .setCenterX(paddingLR + blockW / 2 + x * blockW)
-                        //                        .setCenterY(paddingTB + blockH / 2 + y * blockH)
-                        //                        .setWidth(blockW)
-                        //                        .setHeight(blockH)
                         .setColor(getRandomColor())
                         .setNeedPadding(needPadding)
                         .build();

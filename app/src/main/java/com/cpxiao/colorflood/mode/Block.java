@@ -39,19 +39,18 @@ public class Block {
     }
 
     private Block(Builder builder) {
-        gridX = builder.mGridX;
-        gridY = builder.mGridY;
-        color = builder.color;
-        needPadding = builder.needPadding;
+        this.width = builder.width;
+        this.height = builder.height;
+        this.gridX = builder.gridX;
+        this.gridY = builder.gridY;
+        this.color = builder.color;
+        this.needPadding = builder.needPadding;
 
         updateSize(builder.centerX, builder.centerY, builder.width, builder.height);
     }
 
     public void updateSize(float centerX, float centerY, float width, float height) {
         if (width <= 0 || height <= 0) {
-            if (DEBUG) {
-//                throw new IllegalArgumentException("width <= 0 || height <= 0");
-            }
             return;
         }
         this.centerX = centerX;
@@ -107,25 +106,25 @@ public class Block {
     }
 
     public static class Builder {
-        public int mGridX, mGridY;
+        private int gridX, gridY;
 
-        public float centerX, centerY;
+        private float centerX, centerY;
 
-        public float width, height;
+        private float width, height;
 
-        public int color;
-        public boolean needPadding;
+        private int color;
+        private boolean needPadding;
 
         public Builder() {
         }
 
         public Builder setGridX(int gridX) {
-            mGridX = gridX;
+            this.gridX = gridX;
             return this;
         }
 
         public Builder setGridY(int gridY) {
-            mGridY = gridY;
+            this.gridY = gridY;
             return this;
         }
 

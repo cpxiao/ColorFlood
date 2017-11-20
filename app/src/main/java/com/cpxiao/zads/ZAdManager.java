@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.cpxiao.AppConfig;
 import com.cpxiao.zads.ads.AdMobBannerAd;
 import com.cpxiao.zads.ads.AdMobNativeExpressAd;
 import com.cpxiao.zads.ads.FbBannerAd;
@@ -16,6 +17,7 @@ import com.cpxiao.zads.core.ZAdDefaultConfig;
 import com.cpxiao.zads.core.ZAdListener;
 import com.cpxiao.zads.core.ZAdPosition;
 import com.cpxiao.zads.core.ZAdType;
+import com.cpxiao.zads.utils.UMeng;
 
 import java.util.List;
 import java.util.Queue;
@@ -27,7 +29,7 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 public class ZAdManager {
 
-    private static final boolean DEBUG = ZAdsConfig.DEBUG;
+    private static final boolean DEBUG = AppConfig.ADS_DEBUG;
     private static final String TAG = ZAdManager.class.getSimpleName();
 
     //广告配置数据
@@ -145,14 +147,15 @@ public class ZAdManager {
         }
         //请求第一个,如果失败请求下一个
         final Advertisement advertisement = queue.poll();
-        //此处有个坑，注意回调的时候要在主线程中，否则有些广告会crash！
+        //注意回调的时候要在主线程中，否则有些广告会crash！
         advertisement.setListener(new ZAdListener() {
             @Override
             public void onLoadSuccess(Advertisement ad) {
                 if (DEBUG) {
                     Log.d(TAG, "onLoadSuccess: " + ad.toString() + ", position = " + position);
                 }
-                // TODO 统计：广告请求成功
+                // 统计：广告请求成功
+                UMeng.postStat(appCxt, UMeng.SDK_AD_SUCCESS, ad.toString(), position);
 
                 mLoadedAdViewArrayMap.put(position, ad);
 
@@ -160,6 +163,8 @@ public class ZAdManager {
                 View adView = ad.getLastAdView();
                 if (adView != null) {
                     layout.addView(adView);
+                    // 统计：广告展示
+                    UMeng.postStat(appCxt, UMeng.SDK_AD_IMPRESSION, ad.toString(), position);
                 }
             }
 
@@ -168,7 +173,8 @@ public class ZAdManager {
                 if (DEBUG) {
                     Log.d(TAG, "onLoadFailed: " + ad.toString() + ", position = " + position + ", msg = " + message);
                 }
-                // TODO 统计：广告请求失败
+                // 统计：广告请求失败
+                UMeng.postStat(appCxt, UMeng.SDK_AD_FAIL, ad.toString(), position);
 
                 //获取下一个广告商并加载
                 Advertisement advertisementNext = next.poll();
@@ -180,7 +186,8 @@ public class ZAdManager {
                 }
                 advertisementNext.setListener(this);
                 advertisementNext.load(appCxt, next);
-                // TODO 统计：广告请求开始
+                // 统计：广告请求开始
+                UMeng.postStat(appCxt, UMeng.SDK_AD_LOAD, ad.toString(), position);
 
                 if (DEBUG) {
                     Log.d(TAG, "请求下一个广告商: " + advertisementNext.toString() + ", position = " + position);
@@ -192,12 +199,13 @@ public class ZAdManager {
                 if (DEBUG) {
                     Log.d(TAG, "onAdClick: " + ad.toString() + ", position = " + position);
                 }
-                // TODO 统计：广告点击
-
+                // 统计：广告点击
+                UMeng.postStat(appCxt, UMeng.SDK_AD_CLICK, ad.toString(), position);
             }
         });
         advertisement.load(appCxt, queue);
-        // TODO 统计：广告请求开始
+        // 统计：广告请求开始
+        UMeng.postStat(appCxt, UMeng.SDK_AD_LOAD, advertisement.toString(), position);
 
         if (DEBUG) {
             Log.d(TAG, "请求广告商: " + advertisement.toString() + ", position = " + position);

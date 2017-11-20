@@ -52,7 +52,8 @@ public class TwoPlayersGameFragment extends BaseZAdsFragment {
             mGridCountY = bundle.getInt(Extra.Name.GAME_DIFFICULTY_Y);
         }
         Context context = getHoldingActivity();
-        mColorArray = BlockColor._6colorArray;
+        mColorArray = BlockColor.get6ColorArray(context);
+
         boolean needPadding = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_HAS_BORDERS, Extra.Key.SETTING_HAS_BORDERS_DEFAULT);
         mController = new Controller.Builder()
                 .setGridCountX(mGridCountX)
