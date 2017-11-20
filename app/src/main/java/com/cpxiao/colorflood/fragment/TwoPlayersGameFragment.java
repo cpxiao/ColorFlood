@@ -12,14 +12,15 @@ import com.cpxiao.colorflood.mode.extra.BlockColor;
 import com.cpxiao.colorflood.mode.extra.Extra;
 import com.cpxiao.colorflood.views.ColorToolView;
 import com.cpxiao.colorflood.views.GameView;
-import com.cpxiao.gamelib.fragment.BaseFragment;
+import com.cpxiao.gamelib.fragment.BaseZAdsFragment;
 import com.cpxiao.gamelib.views.RotateTextView;
+import com.cpxiao.zads.core.ZAdPosition;
 
 /**
  * @author cpxiao on 2017/09/01.
  */
 
-public class TwoPlayersGameFragment extends BaseFragment {
+public class TwoPlayersGameFragment extends BaseZAdsFragment {
     private int mGridCountX, mGridCountY;
     private boolean isPlayerBottomStep;
     private ColorToolView mColorToolViewTop, mColorToolViewBottom;
@@ -43,6 +44,8 @@ public class TwoPlayersGameFragment extends BaseFragment {
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
+        loadZAds(ZAdPosition.POSITION_GAME);
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             mGridCountX = bundle.getInt(Extra.Name.GAME_DIFFICULTY_X);

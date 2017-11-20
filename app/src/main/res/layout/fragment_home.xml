@@ -40,13 +40,6 @@
             android:text="@string/mode_step_challenge"/>
 
         <Button
-            android:id="@+id/btn_vs_computer"
-            style="@style/HomeBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/mode_vs_computer"/>
-
-        <Button
             android:id="@+id/btn_2player"
             style="@style/HomeBtn"
             android:layout_width="match_parent"

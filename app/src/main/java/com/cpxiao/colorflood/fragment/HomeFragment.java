@@ -34,7 +34,6 @@ public class HomeFragment extends BaseZAdsFragment implements View.OnClickListen
 
         Button btnCasual = (Button) view.findViewById(R.id.btn_casual);
         Button btnStepChallenge = (Button) view.findViewById(R.id.btn_step_challenge);
-        Button btnVSComputer = (Button) view.findViewById(R.id.btn_vs_computer);
         Button btn2player = (Button) view.findViewById(R.id.btn_2player);
         Button btnSettings = (Button) view.findViewById(R.id.btn_settings);
         Button btnBestScore = (Button) view.findViewById(R.id.btn_best_score);
@@ -44,7 +43,6 @@ public class HomeFragment extends BaseZAdsFragment implements View.OnClickListen
 
         btnCasual.setOnClickListener(this);
         btnStepChallenge.setOnClickListener(this);
-        btnVSComputer.setOnClickListener(this);
         btn2player.setOnClickListener(this);
         btnSettings.setOnClickListener(this);
         btnBestScore.setOnClickListener(this);
@@ -52,7 +50,6 @@ public class HomeFragment extends BaseZAdsFragment implements View.OnClickListen
         btnShare.setOnClickListener(this);
         btnQuit.setOnClickListener(this);
 
-        btnVSComputer.setVisibility(View.GONE);
         btnBestScore.setVisibility(View.GONE);
     }
 
@@ -80,11 +77,6 @@ public class HomeFragment extends BaseZAdsFragment implements View.OnClickListen
             bundle.putInt(Extra.Name.GAME_DIFFICULTY_Y, sizeY);
             bundle.putInt(Extra.Name.LIMIT_STEP, sizeX + sizeY);
             addFragment(StepChallengeGameFragment.newInstance(bundle));
-        } else if (id == R.id.btn_vs_computer) {
-            Bundle bundle = new Bundle();
-            bundle.putInt(Extra.Name.GAME_DIFFICULTY_X, sizeX);
-            bundle.putInt(Extra.Name.GAME_DIFFICULTY_Y, sizeY);
-            addFragment(VsComputerGameFragment.newInstance(bundle));
         } else if (id == R.id.btn_2player) {
             Bundle bundle = new Bundle();
             bundle.putInt(Extra.Name.GAME_DIFFICULTY_X, sizeX);
@@ -93,7 +85,7 @@ public class HomeFragment extends BaseZAdsFragment implements View.OnClickListen
         } else if (id == R.id.btn_settings) {
             addFragment(SettingsFragment.newInstance(null));
         } else if (id == R.id.btn_best_score) {
-            addFragment(BestScoreFragment.newInstance(null));
+//            addFragment(BestScoreFragment.newInstance(null));
         } else if (id == R.id.btn_rate_app) {
             RateAppUtils.rate(context);
         } else if (id == R.id.btn_share) {
