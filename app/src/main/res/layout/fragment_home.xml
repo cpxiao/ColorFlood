@@ -68,6 +68,20 @@
             android:text="@string/best_score"/>
 
         <Button
+            android:id="@+id/btn_rate_app"
+            style="@style/HomeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rate_app"/>
+
+        <Button
+            android:id="@+id/btn_share"
+            style="@style/HomeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/share"/>
+
+        <Button
             android:id="@+id/btn_quit"
             style="@style/HomeBtn"
             android:layout_width="match_parent"
@@ -76,5 +90,4 @@
     </LinearLayout>
 
 
-    <!--<include layout="@layout/layout_ads"/>-->
 </LinearLayout>

@@ -6,15 +6,16 @@
     <string name="mode_step_challenge">Step Challenge</string>
     <string name="mode_vs_computer">VS Computer</string>
     <string name="mode_2player">2 Players</string>
-
     <string name="settings">Settings</string>
     <string name="best_score">Best Score</string>
+    <string name="rate_app">Rate this app</string>
+    <string name="share">Share</string>
     <string name="quit">Quit</string>
 
     <string name="mission_completed">Mission Completed</string>
     <string name="completed_msg">completed in %s steps</string>
-    <string name="game_over">Game Over!</string>
-    <string name="play_again">Play Again?</string>
+    <string name="game_over">Game Over !</string>
+    <string name="play_again">Play Again ?</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
 

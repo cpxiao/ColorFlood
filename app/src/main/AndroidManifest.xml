@@ -32,25 +32,6 @@
             </intent-filter>
         </activity>
 
-        <!--<activity-->
-            <!--android:name="com.cpxiao.colorflood.activity.CasualGameActivity"-->
-            <!--android:screenOrientation="portrait"/>-->
-        <!--<activity-->
-            <!--android:name="com.cpxiao.colorflood.activity.StepChallengeGameActivity"-->
-            <!--android:screenOrientation="portrait"/>-->
-        <!--<activity-->
-            <!--android:name="com.cpxiao.colorflood.activity.VsComputerGameActivity"-->
-            <!--android:screenOrientation="portrait"/>-->
-        <!--<activity-->
-            <!--android:name="com.cpxiao.colorflood.activity.TwoPlayersGameActivity"-->
-            <!--android:screenOrientation="portrait"/>-->
-        <!--<activity-->
-            <!--android:name="com.cpxiao.colorflood.activity.SettingsActivity"-->
-            <!--android:screenOrientation="portrait"/>-->
-        <!--<activity-->
-            <!--android:name="com.cpxiao.colorflood.activity.BestScoreActivity"-->
-            <!--android:screenOrientation="portrait"/>-->
-
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="593f39207f2c7475e2000f07"/>

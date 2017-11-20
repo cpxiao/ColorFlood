@@ -51,17 +51,8 @@ public class StepChallengeGameFragment extends BaseFragment {
 
         final Context context = getHoldingActivity();
         mColorArray = BlockColor._6colorArray;
-        //        boolean needPadding = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_HAS_BORDERS, Extra.Key.SETTING_HAS_BORDERS_DEFAULT);
-        //        mController = new Controller.Builder()
-        //                .setGridCountX(mGridCountX)
-        //                .setGridCountY(mGridCountY)
-        //                .setNeedPadding(needPadding)
-        //                .setColorArray(mColorArray)
-        //                .build();
 
         mScoreView = (TextView) view.findViewById(R.id.score_view);
-        //        mScore = 0;
-        //        setScoreView(mScore);
 
         ColorToolView colorToolView = (ColorToolView) view.findViewById(R.id.color_tool_view);
         colorToolView.setColorArray(true, mColorArray);
@@ -89,7 +80,6 @@ public class StepChallengeGameFragment extends BaseFragment {
         });
 
         gameView = (GameView) view.findViewById(R.id.game_view);
-        //        gameView.setController(mController);
 
         initGameView(context);
     }
@@ -124,7 +114,7 @@ public class StepChallengeGameFragment extends BaseFragment {
     }
 
     public void showFailDialog(Context context) {
-        String title = context.getString(R.string.game_over);
+        String title =  context.getString(R.string.game_over);
         String msg = context.getString(R.string.play_again);
         showDialog(context, title, msg);
     }
@@ -140,12 +130,6 @@ public class StepChallengeGameFragment extends BaseFragment {
                 .setPositiveButton(context.getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //                        Bundle bundle = new Bundle();
-                        //                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_X, mGridCountX);
-                        //                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_Y, mGridCountY);
-                        //                        bundle.putInt(Extra.Name.LIMIT_STEP, mLimitStep);
-                        //                        addFragment(StepChallengeGameFragment.newInstance(bundle));
-
                         initGameView(context);
                     }
                 })

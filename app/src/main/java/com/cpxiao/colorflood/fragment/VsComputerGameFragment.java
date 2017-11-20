@@ -30,6 +30,7 @@ public class VsComputerGameFragment extends BaseFragment {
         }
         return fragment;
     }
+
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
         Bundle bundle = getArguments();

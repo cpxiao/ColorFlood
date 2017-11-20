@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import com.cpxiao.R;
 import com.cpxiao.androidutils.library.utils.PreferencesUtils;
+import com.cpxiao.androidutils.library.utils.RateAppUtils;
+import com.cpxiao.androidutils.library.utils.ShareAppUtils;
 import com.cpxiao.colorflood.mode.extra.Extra;
 import com.cpxiao.colorflood.mode.extra.GridSize;
 import com.cpxiao.gamelib.fragment.BaseZAdsFragment;
@@ -36,6 +38,8 @@ public class HomeFragment extends BaseZAdsFragment implements View.OnClickListen
         Button btn2player = (Button) view.findViewById(R.id.btn_2player);
         Button btnSettings = (Button) view.findViewById(R.id.btn_settings);
         Button btnBestScore = (Button) view.findViewById(R.id.btn_best_score);
+        Button btnRateApp = (Button) view.findViewById(R.id.btn_rate_app);
+        Button btnShare = (Button) view.findViewById(R.id.btn_share);
         Button btnQuit = (Button) view.findViewById(R.id.btn_quit);
 
         btnCasual.setOnClickListener(this);
@@ -44,8 +48,9 @@ public class HomeFragment extends BaseZAdsFragment implements View.OnClickListen
         btn2player.setOnClickListener(this);
         btnSettings.setOnClickListener(this);
         btnBestScore.setOnClickListener(this);
+        btnRateApp.setOnClickListener(this);
+        btnShare.setOnClickListener(this);
         btnQuit.setOnClickListener(this);
-
 
         btnVSComputer.setVisibility(View.GONE);
         btnBestScore.setVisibility(View.GONE);
@@ -58,8 +63,9 @@ public class HomeFragment extends BaseZAdsFragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
         Context context = getHoldingActivity();
+
+        int id = v.getId();
         String size = PreferencesUtils.getString(context, GridSize.SIZE_KEY, GridSize.SIZE_DEFAULT);
         int sizeX = GridSize.getGridCountX(size);
         int sizeY = GridSize.getGridCountY(size);
@@ -88,6 +94,14 @@ public class HomeFragment extends BaseZAdsFragment implements View.OnClickListen
             addFragment(SettingsFragment.newInstance(null));
         } else if (id == R.id.btn_best_score) {
             addFragment(BestScoreFragment.newInstance(null));
+        } else if (id == R.id.btn_rate_app) {
+            RateAppUtils.rate(context);
+        } else if (id == R.id.btn_share) {
+            String msg =
+                    //                    "I’ll Always Be There For You.\n" +
+                    "Share an app \"" + getString(R.string.app_name) + "\" for you.\n" +
+                            "https://play.google.com/store/apps/details?id=" + context.getPackageName();
+            ShareAppUtils.share(context, getString(R.string.share), msg);
         } else if (id == R.id.btn_quit) {
             removeFragment();
         }

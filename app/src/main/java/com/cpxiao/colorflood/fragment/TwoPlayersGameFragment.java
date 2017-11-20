@@ -96,60 +96,36 @@ public class TwoPlayersGameFragment extends BaseFragment {
         return R.layout.fragment_game_2players;
     }
 
-    private void handClick(boolean isPlayerBottom, int color) {
-        synchronized (TAG) {
-            Context context = getHoldingActivity();
-            //若为轮到，则返回
-            if (isPlayerBottom != isPlayerBottomStep) {
-                return;
+    private synchronized void handClick(boolean isPlayerBottom, int color) {
+        //若为轮到，则返回
+        if (isPlayerBottom != isPlayerBottomStep) {
+            return;
+        }
+        //判断能否填充
+        if (mController.canBeFilled(true, isPlayerBottomStep, color)) {
+            //填充
+            mController.update(true, isPlayerBottomStep, color);
+            //更换上下ColorToolView点击状态
+            mColorToolViewTop.setColorClickable(isPlayerBottomStep);
+            mColorToolViewBottom.setColorClickable(!isPlayerBottomStep);
+            //获得分数
+            if (isPlayerBottomStep) {
+                mScoreBottom = mController.getFillCount(true);
+            } else {
+                mScoreTop = mController.getFillCount(false);
             }
-            //判断能否填充
-            if (mController.canBeFilled(true, isPlayerBottomStep, color)) {
-                //填充
-                mController.update(true, isPlayerBottomStep, color);
-                //更换上下ColorToolView点击状态
-                mColorToolViewTop.setColorClickable(isPlayerBottomStep);
-                mColorToolViewBottom.setColorClickable(!isPlayerBottomStep);
-                //获得分数
-                if (isPlayerBottomStep) {
-                    mScoreBottom = mController.getFillCount(true);
-                } else {
-                    mScoreTop = mController.getFillCount(false);
-                }
-                //设置分数
-                setScoreView();
-                if (mController.checkSuccess(mScoreTop, mScoreBottom)) {
-                    //game over
-                    showSuccessDialog(context);
-                }
-                //更换
-                isPlayerBottomStep = !isPlayerBottomStep;
+            //设置分数
+            setScoreView();
+            if (mController.checkSuccess(mScoreTop, mScoreBottom)) {
+                //game over
+                showSuccessMsg();
             }
+            //更换
+            isPlayerBottomStep = !isPlayerBottomStep;
         }
     }
 
-    private void showSuccessDialog(final Context context) {
-        //        AlertDialog dialog = new AlertDialog.Builder(context)
-        //                .setTitle(context.getString(R.string.mission_completed))
-        //                .setMessage(context.getString(R.string.play_again))
-        //                .setPositiveButton(context.getString(R.string.ok), new DialogInterface.OnClickListener() {
-        //                    @Override
-        //                    public void onClick(DialogInterface dialog, int which) {
-        //                        Bundle bundle = TwoPlayersGameActivity.makeBundle(mGridCountX, mGridCountY);
-        //                        Intent intent = TwoPlayersGameActivity.makeIntent(context, bundle);
-        //                        startActivity(intent);
-        //                    }
-        //                })
-        //                .setNegativeButton(context.getString(R.string.cancel), new DialogInterface.OnClickListener() {
-        //                    @Override
-        //                    public void onClick(DialogInterface dialog, int which) {
-        //                        finish();
-        //                    }
-        //                })
-        //                .create();
-        //        dialog.setCanceledOnTouchOutside(false);
-        //        dialog.setCancelable(false);
-        //        dialog.show();
+    private void showSuccessMsg() {
         if (mScoreTop >= mScoreBottom) {
             mTopPlayerMsgView.setText(R.string.you_win);
             mBottomPlayerMsgView.setText(R.string.you_lose);

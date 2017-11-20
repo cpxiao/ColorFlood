@@ -53,17 +53,8 @@ public class CasualGameFragment extends BaseZAdsFragment {
         mColorArray = BlockColor._6colorArray;
 
         final Context context = getHoldingActivity();
-        //        boolean needPadding = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_HAS_BORDERS, Extra.Key.SETTING_HAS_BORDERS_DEFAULT);
-        //        mController = new Controller.Builder()
-        //                .setGridCountX(mGridCountX)
-        //                .setGridCountY(mGridCountY)
-        //                .setNeedPadding(needPadding)
-        //                .setColorArray(mColorArray)
-        //                .build();
 
         mScoreView = (TextView) view.findViewById(R.id.score_view);
-        //        mScore = 0;
-        //        setScoreView(mScore);
 
         mBestScoreView = (TextView) view.findViewById(R.id.best_score_view);
         String key = Extra.Key.CASUAL_GAME_BEST_SCORE + PreferencesUtils.getString(context, GridSize.SIZE_KEY, GridSize.SIZE_DEFAULT);
@@ -72,37 +63,34 @@ public class CasualGameFragment extends BaseZAdsFragment {
 
         final ColorToolView colorToolView = (ColorToolView) view.findViewById(R.id.color_tool_view);
         colorToolView.setColorArray(true, mColorArray);
-        //        colorToolView.setNonClickableColorArray(mController.getNonClickableColorArray(false));
         colorToolView.setOnToolViewClickListener(new OnToolViewClickListener() {
             @Override
             public void onClickColor(int color) {
                 if (mController.canBeFilled(false, true, color)) {
-                    //更新
-                    mController.update(false, true, color);
                     //步数加一
                     mScore++;
                     setScoreView(mScore);
+                    //更新
+                    mController.update(false, true, color);
                     //判断是否完成
                     if (mController.checkSuccess()) {
-                        if (mScore <= mBestScore) {
-                            String key = Extra.Key.CASUAL_GAME_BEST_SCORE + PreferencesUtils.getString(context, GridSize.SIZE_KEY, GridSize.SIZE_DEFAULT);
-                            PreferencesUtils.putInt(context, key, mScore);
-                        }
+                        mBestScore = Math.min(mScore, mBestScore);
+                        String key = Extra.Key.CASUAL_GAME_BEST_SCORE + PreferencesUtils.getString(context, GridSize.SIZE_KEY, GridSize.SIZE_DEFAULT);
+                        PreferencesUtils.putInt(context, key, mBestScore);
+                        setBestScoreView(mBestScore);
+
                         showSuccessDialog();
                     }
-                    //                    //设置colorToolView的不可点击颜色
-                    //                    colorToolView.setNonClickableColorArray(mController.getNonClickableColorArray(false));
                 }
             }
         });
 
         gameView = (GameView) view.findViewById(R.id.game_view);
-        //        gameView.setController(mController);
         initGameView(context);
     }
 
     private void initGameView(Context context) {
-        isDialogShown=false;
+        isDialogShown = false;
         boolean needPadding = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_HAS_BORDERS, Extra.Key.SETTING_HAS_BORDERS_DEFAULT);
         mController = new Controller.Builder()
                 .setGridCountX(mGridCountX)
@@ -136,10 +124,6 @@ public class CasualGameFragment extends BaseZAdsFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        //                        Bundle bundle = new Bundle();
-                        //                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_X, mGridCountX);
-                        //                        bundle.putInt(Extra.Name.GAME_DIFFICULTY_Y, mGridCountY);
-                        //                        addFragment(CasualGameFragment.newInstance(bundle));
                         initGameView(context);
                     }
                 })
