@@ -10,7 +10,6 @@
     <string name="best_score">Best Score</string>
     <string name="rate_app">Rate this app</string>
     <string name="share">Share</string>
-    <string name="quit">Quit</string>
 
     <string name="mission_completed">Mission Completed</string>
     <string name="completed_msg">completed in %s steps</string>
@@ -33,5 +32,6 @@
     <string name="settings_off">Off</string>
 
     <string name="quit_msg">Quit the Game ?</string>
+    <string name="share_msg">"Share an app for you."</string>
 
 </resources>

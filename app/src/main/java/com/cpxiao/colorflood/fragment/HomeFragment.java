@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.cpxiao.R;
 import com.cpxiao.androidutils.library.utils.PreferencesUtils;
@@ -35,20 +36,18 @@ public class HomeFragment extends BaseZAdsFragment implements View.OnClickListen
         Button btnCasual = (Button) view.findViewById(R.id.btn_casual);
         Button btnStepChallenge = (Button) view.findViewById(R.id.btn_step_challenge);
         Button btn2player = (Button) view.findViewById(R.id.btn_2player);
-        Button btnSettings = (Button) view.findViewById(R.id.btn_settings);
-        Button btnBestScore = (Button) view.findViewById(R.id.btn_best_score);
-        Button btnRateApp = (Button) view.findViewById(R.id.btn_rate_app);
-        Button btnShare = (Button) view.findViewById(R.id.btn_share);
-        Button btnQuit = (Button) view.findViewById(R.id.btn_quit);
+        ImageButton btnRateApp = (ImageButton) view.findViewById(R.id.btn_rate_app);
+        ImageButton btnShare = (ImageButton) view.findViewById(R.id.btn_share);
+        ImageButton btnBestScore = (ImageButton) view.findViewById(R.id.btn_best_score);
+        ImageButton btnSettings = (ImageButton) view.findViewById(R.id.btn_settings);
 
         btnCasual.setOnClickListener(this);
         btnStepChallenge.setOnClickListener(this);
         btn2player.setOnClickListener(this);
-        btnSettings.setOnClickListener(this);
-        btnBestScore.setOnClickListener(this);
         btnRateApp.setOnClickListener(this);
         btnShare.setOnClickListener(this);
-        btnQuit.setOnClickListener(this);
+        btnBestScore.setOnClickListener(this);
+        btnSettings.setOnClickListener(this);
 
         btnBestScore.setVisibility(View.GONE);
     }
@@ -89,13 +88,10 @@ public class HomeFragment extends BaseZAdsFragment implements View.OnClickListen
         } else if (id == R.id.btn_rate_app) {
             RateAppUtils.rate(context);
         } else if (id == R.id.btn_share) {
-            String msg =
-                    //                    "I’ll Always Be There For You.\n" +
-                    "Share an app \"" + getString(R.string.app_name) + "\" for you.\n" +
-                            "https://play.google.com/store/apps/details?id=" + context.getPackageName();
+            String msg = getString(R.string.share_msg) +
+                    getString(R.string.app_name) + "\n" +
+                    "https://play.google.com/store/apps/details?id=" + context.getPackageName();
             ShareAppUtils.share(context, getString(R.string.share), msg);
-        } else if (id == R.id.btn_quit) {
-            removeFragment();
         }
     }
 }

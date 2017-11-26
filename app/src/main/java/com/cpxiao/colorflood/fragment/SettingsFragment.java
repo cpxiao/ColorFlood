@@ -37,14 +37,10 @@ public class SettingsFragment extends BaseZAdsFragment implements View.OnClickLi
 
         Context context = getHoldingActivity();
         view.findViewById(R.id.btn_grid_size).setOnClickListener(this);
-        view.findViewById(R.id.btn_color_scheme).setOnClickListener(this);
-        view.findViewById(R.id.btn_color_transparency).setOnClickListener(this);
         view.findViewById(R.id.btn_sound).setOnClickListener(this);
         view.findViewById(R.id.btn_music).setOnClickListener(this);
         view.findViewById(R.id.btn_borders).setOnClickListener(this);
-
-        view.findViewById(R.id.btn_color_scheme).setVisibility(View.GONE);
-        view.findViewById(R.id.btn_color_transparency).setVisibility(View.GONE);
+        view.findViewById(R.id.btn_ok).setOnClickListener(this);
 
         mGridSize = (TextView) view.findViewById(R.id.tv_grid_size);
         String gridSize = PreferencesUtils.getString(context, GridSize.SIZE_KEY, GridSize.SIZE_DEFAULT);
@@ -93,10 +89,6 @@ public class SettingsFragment extends BaseZAdsFragment implements View.OnClickLi
             String nextGridSize = GridSize.getNextGridSize(gridSize);
             PreferencesUtils.putString(context, GridSize.SIZE_KEY, nextGridSize);
             mGridSize.setText(nextGridSize);
-        } else if (id == R.id.btn_color_scheme) {
-
-        } else if (id == R.id.btn_color_transparency) {
-
         } else if (id == R.id.btn_sound) {
             boolean isSoundOn = PreferencesUtils.getBoolean(context, Extra.Key.SETTING_SOUND, Extra.Key.SETTING_SOUND_DEFAULT);
             if (isSoundOn) {
@@ -124,6 +116,8 @@ public class SettingsFragment extends BaseZAdsFragment implements View.OnClickLi
                 PreferencesUtils.putBoolean(context, Extra.Key.SETTING_HAS_BORDERS, true);
                 mBorders.setText(R.string.settings_on);
             }
+        } else if (id == R.id.btn_ok) {
+            removeFragment();
         }
     }
 }
