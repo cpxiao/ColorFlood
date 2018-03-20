@@ -12,4 +12,6 @@ gradlew*
 .idea
 *.apk
 freeline*
-_*
+
+output.json
+google-services.json
